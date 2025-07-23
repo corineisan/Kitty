@@ -1,10 +1,10 @@
 <template>
  <div class="todo">
     <div class="todo-checkbox" v-if="todo.isDone === false" @click="completeTodoHandler"></div>
-    <div class="todo-checkbox todo-complted" v-else @click="completeTodoHandler"></div>
+    <div class="todo-checkbox todo-completed" v-else @click="completeTodoHandler"></div>
 
-    <p>{{ todo.title }}</p>
-    <div>
+    <p :class="todo.isDone === true ? 'line-through':''">{{ todo.title }}</p>
+    <div @click="deleteTodoHandler">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24"
         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round"
@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-const emit  = defineEmits(['complete-todo'])
+const emit  = defineEmits(['complete-todo', 'delete-todo'])
 const props = defineProps({
     todo:{
         type: Object,
@@ -24,7 +24,11 @@ const props = defineProps({
 })
 
 const completeTodoHandler = () => {
-    emit('complete-todo')
+    emit('complete-todo');
+}
+
+const deleteTodoHandler = () => {
+    emit('delete-todo');
 }
 
 </script>
@@ -52,5 +56,8 @@ p {
 
 .todo-completed {
     background-color: plum;
+}
+.line-through{
+    text-decoration: line-through;
 }
 </style>
