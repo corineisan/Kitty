@@ -25,6 +25,6 @@ const markTodoAsComplete = (index) => {
 #todos-container{
   background-color: white;
   padding: 24px;
-  margin-top: 24px;
+  margin-top: 26px;
 }
 </style>
